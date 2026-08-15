@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from "express"
 import dotenv from "dotenv"
 import * as database from "./configs/database"
+import Topic from "./models/topic.model"
 
 dotenv.config()
 
@@ -16,6 +17,12 @@ app.set("view engine", "pug")
 // end Pug
 
 app.get("/topics", (req: Request, res: Response) => {
+  const topics = Topic.find({
+    deleted: false
+  })
+
+  console.log(topics)
+
   res.render("client/pages/topics/index")
 })
 
